@@ -1,3 +1,4 @@
+// task validation utility functions
 const VALID_STATUSES = ['todo', 'in_progress', 'done'];
 const VALID_PRIORITIES = ['low', 'medium', 'high'];
 

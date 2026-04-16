@@ -1,3 +1,4 @@
+// task related api routes
 const express = require('express');
 const router = express.Router();
 const taskService = require('../services/taskService');
@@ -62,6 +63,20 @@ router.delete('/:id', (req, res) => {
 
 router.patch('/:id/complete', (req, res) => {
   const task = taskService.completeTask(req.params.id);
+  if (!task) {
+    return res.status(404).json({ error: 'Task not found' });
+  }
+
+  res.json(task);
+});
+
+router.patch('/:id/assign', (req, res) => {
+  const { assignee } = req.body;
+  if (!assignee || typeof assignee !== 'string' || assignee.trim() === '') {
+    return res.status(400).json({ error: 'Assignee name is required and must be a non-empty string' });
+  }
+
+  const task = taskService.assignTask(req.params.id, assignee);
   if (!task) {
     return res.status(404).json({ error: 'Task not found' });
   }

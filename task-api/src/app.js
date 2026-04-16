@@ -1,3 +1,4 @@
+// main application entry point
 const express = require('express');
 const taskRoutes = require('./routes/tasks');
 
